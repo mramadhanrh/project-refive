@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-  // Start is called before the first frame update
+  public PictureConfig picConf;
+  public int speed = 20;
 
-  int _speed = 10;
-  private Rigidbody2D _rigidbody2D;
+  private Rigidbody2D _rb;
+  private Transform _tr;
+  private int _baseSpeed = 10;
+  private float _distPerc = 0;
+  private float _currSpeed = 0;
   void Start()
   {
-    _rigidbody2D = GetComponent<Rigidbody2D>();
+    _rb = GetComponent<Rigidbody2D>();
+    _tr = GetComponent<Transform>();
   }
 
-  // Update is called once per frame
   void Update()
   {
     UpdateControl();
@@ -24,9 +28,34 @@ public class PlayerControl : MonoBehaviour
     float h = Input.GetAxisRaw("Horizontal");
 
     // normalize so going diagonally doesn't speed things up
-    Vector3 direction = new Vector3(h, v, 0f).normalized;
+    Vector2 direction = new Vector2(h, v).normalized;
 
-    // translate
-    transform.Translate(direction * _speed * Time.deltaTime);
+    _distPerc = this.GetDistancePercentage();
+    float _scale = this.GetSpriteScale(_distPerc);
+    float _speedScale = this.GetSpeedScale(_distPerc);
+    _currSpeed = _speedScale;
+
+    _rb.MovePosition(_rb.position + direction * _speedScale * Time.deltaTime);
+    _tr.localScale = new Vector3(_scale, _scale, 1);
+  }
+
+
+  private float GetDistancePercentage()
+  {
+    float _val = (Mathf.Abs(transform.position.y) - Mathf.Abs(picConf.maxYPos - picConf.minYPos)) * 100;
+
+    if (_val < 0) return 0;
+
+    return _val > 100 ? 100 : _val;
+  }
+
+  private float GetSpriteScale(float distPerc)
+  {
+    return (distPerc * (picConf.maxScale - picConf.minScale) / 100) + picConf.minScale;
+  }
+
+  private float GetSpeedScale(float distPerc)
+  {
+    return picConf.baseSpeed + ((this.GetDistancePercentage() * (picConf.maxSpeed - picConf.minSpeed) / 100) + picConf.minSpeed);
   }
 }
