@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu]
-public class PictureConfig : ScriptableObject
+public class PictureData : ScriptableObject
 {
   public float maxYPos;
   public float minYPos;
@@ -10,5 +10,6 @@ public class PictureConfig : ScriptableObject
   public float baseSpeed = 3;
   public float minSpeed;
   public float maxSpeed;
+  public Vector2 spawnPoint;
 
 }

@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-  public PictureConfig picConf;
   public int speed = 20;
+  public PictureData picConf;
 
+  private float _distPerc = 0, _currSpeed = 0;
   private Rigidbody2D _rb;
   private Transform _tr;
-  private int _baseSpeed = 10;
-  private float _distPerc = 0;
-  private float _currSpeed = 0;
+
   void Start()
   {
     _rb = GetComponent<Rigidbody2D>();
@@ -42,7 +41,7 @@ public class PlayerControl : MonoBehaviour
 
   private float GetDistancePercentage()
   {
-    float _val = (Mathf.Abs(transform.position.y) - Mathf.Abs(picConf.maxYPos - picConf.minYPos)) * 100;
+    float _val = (Mathf.Abs(transform.localPosition.y) - Mathf.Abs(picConf.maxYPos - picConf.minYPos)) * 100;
 
     if (_val < 0) return 0;
 
