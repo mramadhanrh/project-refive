@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Frame: {fileID: 2310319127834268272, guid: 2eb5e750ace0e1d4cb7ddeac6f7aa5ab, type: 3}
-  GridSize: {x: 3, y: 3}
+  GridSize: {x: 5, y: 5}
   PlayerSpawner: {fileID: 644843542}
   _camera: {fileID: 754930471}
 --- !u!1 &644843541

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842b7b815b325d94e93a856d638a04b0, type: 3}
+  m_Name: Tandus
+  m_EditorClassIdentifier: 
+  gridReference: {fileID: 2121764345538082085, guid: 1d455cc1280d46047a70b3ec15974b58, type: 3}
+  list:
+  - {fileID: 6185345689750623229, guid: e42518aeabe42ce49b2e38cc6b78a6f4, type: 3}
+  - {fileID: 5307289268442970560, guid: 3f412ecdda4f4544c88289fba27b52a2, type: 3}

@@ -4,6 +4,7 @@ public class CameraFollow : MonoBehaviour
 {
   private GameObject _player;
 
+  private Vector3 _velocity = Vector3.zero;
   // Start is called before the first frame update
   void Start()
   {
@@ -20,7 +21,8 @@ public class CameraFollow : MonoBehaviour
   {
     if (_player != null)
     {
-      transform.position = Vector3.Lerp(transform.position, _player.transform.position, 0.1f) + new Vector3(0, 0, -10); ;
+      Vector3 playerPos = new Vector3(_player.transform.position.x, _player.transform.position.y, transform.position.z);
+      transform.position = Vector3.SmoothDamp(transform.position, playerPos, ref _velocity, 0.3f);
     }
   }
 

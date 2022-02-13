@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e590680ef5ac20041a77376d9330e012, type: 3}
   m_Name: Sample Picture Config
   m_EditorClassIdentifier: 
-  maxYPos: -2.393095
-  minYPos: -6.177628
+  maxYPos: -2.326643
+  minYPos: -5.575109
   minScale: 1.3
   maxScale: 2
-  baseSpeed: 2
+  baseSpeed: 5
   minSpeed: 8
   maxSpeed: 18
   spawnPoint: {x: 1.29, y: -5.23}

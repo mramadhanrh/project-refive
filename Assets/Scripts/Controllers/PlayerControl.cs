@@ -7,12 +7,10 @@ public class PlayerControl : MonoBehaviour
 
   private float _distPerc = 0, _currSpeed = 0;
   private Rigidbody2D _rb;
-  private Transform _tr;
 
   void Start()
   {
     _rb = GetComponent<Rigidbody2D>();
-    _tr = GetComponent<Transform>();
   }
 
   void Update()
@@ -30,31 +28,32 @@ public class PlayerControl : MonoBehaviour
     Vector2 direction = new Vector2(h, v).normalized;
 
     _distPerc = this.GetDistancePercentage();
-    float _scale = this.GetSpriteScale(_distPerc);
-    float _speedScale = this.GetSpeedScale(_distPerc);
+    float _scale = this.GetSpriteScale();
+    float _speedScale = this.GetSpeedScale();
     _currSpeed = _speedScale;
 
     _rb.MovePosition(_rb.position + direction * _speedScale * Time.deltaTime);
-    _tr.localScale = new Vector3(_scale, _scale, 1);
+    transform.localScale = new Vector3(_scale, _scale, 1);
   }
 
 
   private float GetDistancePercentage()
   {
-    float _val = (Mathf.Abs(transform.localPosition.y) - Mathf.Abs(picConf.maxYPos - picConf.minYPos)) * 100;
+    float distDiff = picConf.maxYPos - picConf.minYPos;
+    float distPlayerDiff = transform.localPosition.y - picConf.maxYPos;
+    float perc = Mathf.Abs((distPlayerDiff / distDiff) * 100);
 
-    if (_val < 0) return 0;
-
-    return _val > 100 ? 100 : _val;
+    if (perc < 0) return 0;
+    return perc > 100 ? 100 : perc;
   }
 
-  private float GetSpriteScale(float distPerc)
+  private float GetSpriteScale()
   {
-    return (distPerc * (picConf.maxScale - picConf.minScale) / 100) + picConf.minScale;
+    return (_distPerc * (picConf.maxScale - picConf.minScale) / 100) + picConf.minScale;
   }
 
-  private float GetSpeedScale(float distPerc)
+  private float GetSpeedScale()
   {
-    return picConf.baseSpeed + ((this.GetDistancePercentage() * (picConf.maxSpeed - picConf.minSpeed) / 100) + picConf.minSpeed);
+    return picConf.baseSpeed + ((_distPerc * (picConf.maxSpeed - picConf.minSpeed) / 100) + picConf.minSpeed);
   }
 }
